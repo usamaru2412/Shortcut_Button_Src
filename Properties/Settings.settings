@@ -17,5 +17,8 @@
     <Setting Name="テキスト名" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="テーブル名" Type="System.String" Scope="User">
+      <Value Profile="(Default)">strstanp</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

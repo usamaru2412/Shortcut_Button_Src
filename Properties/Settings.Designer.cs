@@ -82,5 +82,17 @@ namespace ShortCutButton3.Properties {
                 this["テキスト名"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("strstanp")]
+        public string テーブル名 {
+            get {
+                return ((string)(this["テーブル名"]));
+            }
+            set {
+                this["テーブル名"] = value;
+            }
+        }
     }
 }
