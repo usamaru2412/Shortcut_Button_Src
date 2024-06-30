@@ -177,7 +177,7 @@ namespace MyCreate
             this.richTextBox1.DragDrop += richTextBox1_DragDrop;
         }
 
-        #region //-----------------------------------------------------------//
+        #region //-------------------【リッチテキストボックスのドラッグ＆ドロップ】----------------------------------------//
 
         private void richTextBox1_DragEnter(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.All;
@@ -412,5 +412,15 @@ namespace MyCreate
             ShortCutButton3.Program.form1.Get_Table = ShortCutButton3.Program.form1.Get_Table;
         }
 
+        private void textBox1_DragEnter(object sender, DragEventArgs e) {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void textBox1_DragDrop(object sender, DragEventArgs e) {
+            //ドロップされたファイルの一覧を取得
+            string[] sFileName = (string[])e.Data.GetData(System.Windows.Forms.DataFormats.FileDrop, false);
+            string path = sFileName[0];
+            textBox1.Text = System.IO.Path.GetFileNameWithoutExtension(path);
+        }
     }
 }

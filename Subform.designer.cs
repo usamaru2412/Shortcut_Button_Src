@@ -173,6 +173,7 @@ namespace MyCreate
             // 
             // textBox1
             // 
+            this.textBox1.AllowDrop = true;
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox1.Location = new System.Drawing.Point(107, 3);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -180,6 +181,8 @@ namespace MyCreate
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(511, 68);
             this.textBox1.TabIndex = 0;
+            this.textBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox1_DragDrop);
+            this.textBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox1_DragEnter);
             // 
             // button1
             // 
