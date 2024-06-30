@@ -190,7 +190,10 @@ namespace ShortCutButton3 {
 
             subData = new SQLite_URL_Pass(Exe_Path.exe_Path() + @"SubDataList\subdata.db");
             dataGridView1.ColumnCount = 4;
-            Select_Table_Name = "strstanp";
+            if (Properties.Settings.Default.テーブル名!="") {
+                Select_Table_Name = Properties.Settings.Default.テーブル名;
+                this.Text = Properties.Settings.Default.テーブル名;
+            }
 
             Select_ResetData(ref dataGridView1, Select_Table_Name);
             // ReSet_dataGrid2();
@@ -207,7 +210,7 @@ namespace ShortCutButton3 {
                     Properties.Settings.Default.テキストパス = SELECTPath;
                     Properties.Settings.Default.テキスト名 = comboBox.Text;
                 }
-
+                Properties.Settings.Default.テーブル名 = Select_Table_Name;
 
                 Properties.Settings.Default.位置 = this.Location;
                 Properties.Settings.Default.サイズ = this.Size;

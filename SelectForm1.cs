@@ -39,8 +39,14 @@ namespace MyCreate {
 
 
         private void button1_Click(object sender, EventArgs e) {
-            ShortCutButton3.Program.form1.Get_Table = listBox1.Text;
-           this.Close();
+            if (listBox1.SelectedIndex >= 0 && listBox1.Text != "") {
+                    ShortCutButton3.Program.form1.Get_Table = listBox1.Text;
+                    ShortCutButton3.Program.form1.Text = listBox1.Text;
+                    this.Close();
+            } else {
+                MsgBoxs.Messge_OK_NO(Msg_Enm.DEFAULT, "テーブルが選択されていません");
+            }
+
         }
 
         private void CANCEL_btn_Click(object sender, EventArgs e) {
@@ -74,11 +80,17 @@ namespace MyCreate {
 
         private void テーブル削除toolStrip_Click(object sender, EventArgs e) {
 
-            if(dataGridView1.CurrentRow.Index >= 0) {
-                string moji = "テーブル削除をします\nよろしいですか？\n" + dataGridView1.CurrentCell.Value.ToString();
+
+            if(listBox1.SelectedIndex >= 0 && listBox1.Text!="" && listBox1.Items.Count>=2) {
+
+                if (listBox1.Text == ShortCutButton3.Program.form1.Get_Table) {
+                    MsgBoxs.Messge_OK_NO(Msg_Enm.DEFAULT,"今選択中のテーブルは削除できません");
+                    return;
+                }
+                string moji = "テーブル削除をします\nよろしいですか？\n削除項目[ " + listBox1.Text+" ]";
                 if (MsgBoxs.Messge_OK_NO(Msg_Enm.YES_NO_yes,moji)) {
                     string sql = "";
-                    ShortCutButton3.Form1.subData.Delete_Table_Query(dataGridView1.CurrentCell.Value.ToString(),ref sql);
+                    ShortCutButton3.Form1.subData.Delete_Table_Query(listBox1.Text,ref sql);
                     Table_ReSet();
                 } else {
 
