@@ -206,10 +206,10 @@ namespace ShortCutButton3 {
         #region -------------【 Closeイベント   】---------------------------------------//
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             try {
-                if(SELECTName!="" && SELECTPath != "") {
-                    Properties.Settings.Default.テキストパス = SELECTPath;
-                    Properties.Settings.Default.テキスト名 = comboBox.Text;
-                }
+        
+                Properties.Settings.Default.テキストパス = SELECTPath;
+                Properties.Settings.Default.テキスト名 = SELECTName;
+                
                 Properties.Settings.Default.テーブル名 = Select_Table_Name;
 
                 Properties.Settings.Default.位置 = this.Location;
@@ -253,14 +253,13 @@ namespace ShortCutButton3 {
                 dataGridView1.RefreshEdit();
                 dataGridView1.NotifyCurrentCellDirty(true);
             }
-            // チェック列だったら
-            if (e.ColumnIndex == 1) {
+            // チェック列以外
+            if (e.ColumnIndex > 0) {
                 //Console.WriteLine("クリック");
                 if (dataGridView1.CurrentRow.Index >= 0) {
-
-                    comboBox.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                    SELECTName = comboBox.Text;
+                    SELECTName = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                     SELECTPath = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                    comboBox.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                     OK_Path(comboBox.Text, SELECTPath);
                     toolTip1.SetToolTip(dataGridView1, Path.GetFileNameWithoutExtension(dataGridView1.CurrentRow.Cells[1].ToString()));
                 }
@@ -272,7 +271,7 @@ namespace ShortCutButton3 {
             if (dataGridView1.CurrentRow.Index >= 0) {
 
                 comboBox.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                SELECTName = comboBox.Text;
+                SELECTName = dataGridView1.CurrentRow.Cells[1].Value.ToString();
                 SELECTPath = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                 OK_Path(comboBox.Text, SELECTPath);
                 toolTip1.SetToolTip(dataGridView1, Path.GetFileNameWithoutExtension(dataGridView1.CurrentRow.Cells[1].ToString()));
@@ -504,7 +503,8 @@ namespace ShortCutButton3 {
             if (System.IO.File.Exists(paths)) {
                 comboBox.Text = paths;
                 string fname = Path.GetFileName(paths);
-
+                SELECTName = System.IO.Path.GetFileNameWithoutExtension(paths);
+                SELECTPath = paths;
                 string sql = "";
                 subData.INSERT_SQL(InsertSet(paths), Select_Table_Name, ref sql);
                 button1.Enabled = true;
@@ -513,6 +513,8 @@ namespace ShortCutButton3 {
                 string fname = Path.GetFileName(paths);
                 string sql = "";
                 subData.INSERT_SQL(InsertSet(paths), Select_Table_Name, ref sql);
+                SELECTName =System.IO.Path.GetFileNameWithoutExtension( paths);
+                SELECTPath = paths;
                 button1.Enabled = true;
             } else {
                 button1.Enabled = false;
